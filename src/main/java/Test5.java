@@ -6,5 +6,6 @@ public class Test5 {
         String [] arr = new String[10];
         String num = "number ";
         Arrays.stream(arr).map(e -> num + " " + new Random().nextInt(10)).forEach(System.out::println);
+        System.out.println("RAVIL");
     }
 }
