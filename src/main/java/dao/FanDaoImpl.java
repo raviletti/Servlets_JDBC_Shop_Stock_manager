@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
+    private MysqlConnection mysqlcon;
     public static final String SQL_SELECT_ALL_FANS =
             "SELECT * FROM fans";
     public static final String SQL_SELECT_FAN_ID =
@@ -30,13 +31,15 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
             "SELECT quantity_in_stock, free_stock FROM fans WHERE model_name =?";
     public static final String DRIVER = ResourceBundle.getBundle("database").getString("db.driver");
 
+    public FanDaoImpl(String DBProps){
+        this.mysqlcon = new MysqlConnection(DBProps);
+    }
 
     @Override
     public List<Fan> findAll() {
         List<Fan> fans = new ArrayList<>();
-        try(Connection connection = ConnectorDB.getConnection();
+        try(Connection connection = mysqlcon.getConnection();
             Statement statement = connection.createStatement()){
-            Class.forName(DRIVER);
             ResultSet rs = statement.executeQuery(SQL_SELECT_ALL_FANS);
             while (rs.next()){
                 int id = rs.getInt(1);
@@ -51,7 +54,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 fans.add(new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock));
             }
         }
-        catch (SQLException | ClassNotFoundException e){
+        catch (SQLException e){
             System.out.println(e.getMessage());
         }
 
@@ -61,9 +64,8 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     @Override
     public Fan findById(Integer id) {
         Fan fan = null;
-        try(Connection connection = ConnectorDB.getConnection();
+        try(Connection connection = mysqlcon.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FAN_ID)){
-            Class.forName(DRIVER);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()){
@@ -77,7 +79,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 fan =  new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock);
             }
         }
-        catch (SQLException | ClassNotFoundException e){
+        catch (SQLException e){
             System.out.println(e.getMessage());
         }
         return fan;
@@ -86,9 +88,8 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     @Override
     public List<Fan> findByModelName(String modelName) {
         List<Fan> fans = new ArrayList<>();
-        try(Connection connection = ConnectorDB.getConnection();
+        try(Connection connection = mysqlcon.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FANS_MODELNAME)){
-            Class.forName(DRIVER);
             preparedStatement.setString(1, modelName);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -103,7 +104,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 fans.add(new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock));
             }
         }
-        catch (SQLException | ClassNotFoundException e){
+        catch (SQLException e){
             System.out.println(e.getMessage());
         }
 
@@ -113,9 +114,8 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     @Override
     public List<Fan> findByProducer(String producer) {
         List<Fan> fans = new ArrayList<>();
-        try(Connection connection = ConnectorDB.getConnection();
+        try(Connection connection = mysqlcon.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FANS_PRODUCER)){
-            Class.forName(DRIVER);
             preparedStatement.setString(1, producer);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -130,7 +130,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 fans.add(new Fan(id, modelName, producer, quantity, volume, weight, inOrder, freeStock));
             }
         }
-        catch (SQLException | ClassNotFoundException e){
+        catch (SQLException e){
             System.out.println(e.getMessage());
         }
 
@@ -140,14 +140,13 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     @Override
     public boolean deleteById(Integer id) {
         boolean isDeleted = false;
-        try (Connection connection = ConnectorDB.getConnection();
+        try (Connection connection = mysqlcon.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_FAN_ID)) {
-            Class.forName(DRIVER);
             preparedStatement.setInt(1, id);
             isDeleted = (preparedStatement.executeUpdate() == 1) ?  true :  false;
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return isDeleted;
@@ -156,14 +155,13 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     @Override
     public boolean delete(Fan entity) {
         boolean isDeleted = false;
-        try (Connection connection = ConnectorDB.getConnection();
+        try (Connection connection = mysqlcon.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_FAN_ID)) {
-            Class.forName(DRIVER);
             preparedStatement.setInt(1, entity.getId());
             isDeleted = preparedStatement.executeUpdate() == 1;
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return isDeleted;
@@ -172,9 +170,8 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     @Override
     public boolean create(Fan entity) {
         boolean isAdded = false;
-        try (Connection connection = ConnectorDB.getConnection();
+        try (Connection connection = mysqlcon.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_FAN)) {
-            Class.forName(DRIVER);
             preparedStatement.setString(1, entity.getModelName());
             preparedStatement.setString(2, entity.getProducerName());
             preparedStatement.setInt(3, entity.getQuantity());
@@ -185,7 +182,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
             isAdded = preparedStatement.executeUpdate() == 1;
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return isAdded;
@@ -193,9 +190,8 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
 
     @Override
     public Fan update(Fan entity) {
-        try (Connection connection = ConnectorDB.getConnection();
+        try (Connection connection = mysqlcon.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_FANS)) {
-            Class.forName(DRIVER);
             preparedStatement.setInt(6, entity.getId());
             preparedStatement.setString(1, entity.getModelName());
             preparedStatement.setString(2, entity.getProducerName());
@@ -208,7 +204,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
             preparedStatement.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return entity;
@@ -218,9 +214,8 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     public String getStock(Fan entity) {
         String stock = "quantity in stock: ";
         String free = "free stock: ";
-        try(Connection connection = ConnectorDB.getConnection();
+        try(Connection connection = mysqlcon.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FAN_ID)){
-            Class.forName(DRIVER);
             preparedStatement.setString(1, entity.getModelName());
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()){
@@ -231,7 +226,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 free += freeStock;
             }
         }
-        catch (SQLException | ClassNotFoundException e){
+        catch (SQLException e){
             System.out.println(e.getMessage());
         }
         return stock + " " + free;
