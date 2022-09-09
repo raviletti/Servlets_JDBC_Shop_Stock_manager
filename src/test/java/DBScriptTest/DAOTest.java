@@ -7,12 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
 
 
-import java.awt.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class SomeTest {
+class DAOTest {
     TestDBService testDBService = new TestDBService("testdb");
     @BeforeAll
     void beforeAll() {
