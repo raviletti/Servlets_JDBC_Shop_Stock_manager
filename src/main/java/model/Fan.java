@@ -9,10 +9,14 @@ public class Fan extends AbstractProduct {
     private double weight;
     private int inOrder;
     private int freeStock;
+    private String location;
+    private String description;
+
 
     private double price;
 
-    public Fan(int id, String modelName, String producerName, int quantity, double volume, double weight, int inOrder, int freeStock) {
+    public Fan(int id, String modelName, String producerName, int quantity, double volume,
+               double weight, int inOrder, int freeStock, String location, String description) {
         this.id = id;
         this.modelName = modelName;
         this.producerName = producerName;
@@ -21,16 +25,20 @@ public class Fan extends AbstractProduct {
         this.weight = weight;
         this.inOrder = inOrder;
         this.freeStock = freeStock;
+        this.location = location;
+        this.description = description;
     }
 
-    public Fan(String modelName, String producerName, int quantity, double volume, double weight,int inOrder, int freeStock) {
+    public Fan(String modelName, String producerName, int quantity, double volume,
+               double weight,int inOrder, String location, String description) {
         this.modelName = modelName;
         this.producerName = producerName;
         this.quantity = quantity;
         this.volume = volume;
         this.weight = weight;
         this.inOrder = inOrder;
-        this.freeStock = freeStock;
+        this.location = location;
+        this.description = description;
     }
 
 
@@ -40,6 +48,8 @@ public class Fan extends AbstractProduct {
         return "Fan{" +
                 "id=" + id +
                 ", modelName='" + modelName + '\'' +
+                ", producerName='" + producerName + '\'' +
+                ", quantity=" + quantity +
                 ", price=" + price +
                 ", volume=" + volume +
                 ", weight=" + weight +
@@ -121,5 +131,21 @@ public class Fan extends AbstractProduct {
 
     public void setFreeStock(int freeStock) {
         this.freeStock = freeStock;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

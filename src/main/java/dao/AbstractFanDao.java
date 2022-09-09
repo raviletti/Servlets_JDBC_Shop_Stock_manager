@@ -20,7 +20,5 @@ import java.util.List;
         public abstract boolean create(T entity);
 
         public abstract T update(T entity);
-
-        public abstract S getStock(T entity);
     }
 
