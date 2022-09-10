@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface WarehouseServise <K extends Number, S extends String, T>{
@@ -16,7 +15,7 @@ public interface WarehouseServise <K extends Number, S extends String, T>{
 
     public abstract boolean delete(T entity);
 
-    public abstract boolean create(T entity) throws SQLException;
+    public abstract boolean create(T entity);
 
     public abstract T update(T entity);
 

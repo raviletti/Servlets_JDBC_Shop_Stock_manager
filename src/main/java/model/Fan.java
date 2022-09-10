@@ -29,8 +29,24 @@ public class Fan extends AbstractProduct {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Fan{" +
+                "id=" + id +
+                ", modelName='" + modelName + '\'' +
+                ", producerName='" + producerName + '\'' +
+                ", quantity=" + quantity +
+                ", volume=" + volume +
+                ", weight=" + weight +
+                ", inOrder=" + inOrder +
+                ", freeStock=" + freeStock +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     public Fan(String modelName, String producerName, int quantity, double volume,
-               double weight,int inOrder, String location, String description) {
+               double weight, int inOrder, String location, String description) {
         this.modelName = modelName;
         this.producerName = producerName;
         this.quantity = quantity;
@@ -41,20 +57,6 @@ public class Fan extends AbstractProduct {
         this.description = description;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Fan{" +
-                "id=" + id +
-                ", modelName='" + modelName + '\'' +
-                ", producerName='" + producerName + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", volume=" + volume +
-                ", weight=" + weight +
-                '}';
-    }
 
     @Override
     public Fan getTotal() {

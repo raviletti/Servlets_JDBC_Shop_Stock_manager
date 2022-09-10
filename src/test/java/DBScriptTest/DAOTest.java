@@ -131,7 +131,6 @@ class DAOTest {
     public void testUpdate(){
         FanDaoImpl fdi = new FanDaoImpl("testdb");
         Fan fan = fdi.findById(2);
-        fdi.create(fan);
         String newModelName = "newModelName";
         String newProducer = "newProducer";
         int newQuantity = 100;

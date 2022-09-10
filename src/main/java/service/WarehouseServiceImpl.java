@@ -3,12 +3,17 @@ package service;
 import dao.FanDaoImpl;
 import model.Fan;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class WarehouseServiceImpl implements WarehouseServise<Integer, String, Fan> {
-    
-    FanDaoImpl fdi = new FanDaoImpl("database");
+    private FanDaoImpl fdi = new FanDaoImpl("database");
+
+    public WarehouseServiceImpl() {
+    }
+
+    public WarehouseServiceImpl(String properties) {
+        this.fdi = new FanDaoImpl(properties);
+    }
 
     @Override
     public List<Fan> findAll() {
@@ -42,31 +47,53 @@ public class WarehouseServiceImpl implements WarehouseServise<Integer, String, F
     }
 
     @Override
-    public boolean create(Fan entity) throws SQLException {
+    public boolean create(Fan entity) {
+        boolean isCreated = false;
         List<Fan> fanList = fdi.findByModelName(entity.getModelName());
-        boolean createResult = false;
+
         switch (fanList.size()){
             case 0 :
-                createResult = fdi.create(entity);
+                fdi.create(entity);
+                isCreated = true;
+                break;
             case 1 :
-                fanList.get(0).setQuantity(fanList.get(0).getQuantity() + entity.getQuantity());
-                  fdi.update(fanList.get(0));
-            case 2 :
+                Fan foundFan = fanList.get(0);
+               if(entity.getLocation().equals(foundFan.getLocation())){
+                   foundFan.setQuantity(foundFan.getQuantity() + entity.getQuantity());
+                   fdi.update(foundFan);
+                   isCreated = true;
+                   break;
+               }
+               else fdi.create(entity);
+
+               break;
+            default:
                 for(Fan fan : fanList){
-                   if (fan.getLocation().equals(entity.getLocation())) {
-                       fan.setQuantity(fan.getQuantity() + entity.getQuantity());
-                       fdi.update(fan);
-                   }
-                   //to refactor with streams
+                if(entity.getLocation().equals(fan.getLocation())){
+                    fan.setQuantity(fan.getQuantity() + entity.getQuantity());
+                    fdi.update(fan);
+                    isCreated = true;
+                }
+            }
+                if(!isCreated){
+                    fdi.create(entity);
+                    break;
                 }
         }
-
-        return createResult;
+        return isCreated;
     }
 
     @Override
     public Fan update(Fan entity) {
 
          return fdi.update(entity);
+    }
+
+    public FanDaoImpl getFdi() {
+        return fdi;
+    }
+
+    public void setFdi(FanDaoImpl fdi) {
+        this.fdi = fdi;
     }
 }
