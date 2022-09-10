@@ -57,7 +57,7 @@ public class Fan extends AbstractProduct {
     }
 
     @Override
-    public AbstractProduct getTotal() {
+    public Fan getTotal() {
         return null;
     }
 
