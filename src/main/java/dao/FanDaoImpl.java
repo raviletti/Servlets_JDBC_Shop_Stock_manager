@@ -5,7 +5,6 @@ import model.Fan;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     private MysqlConnection mysqlcon;
@@ -21,16 +20,19 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
             "DELETE FROM fans WHERE id=?";
     public static final String SQL_CREATE_FAN =
             "INSERT INTO fans (model_name, producer_name, quantity_in_stock, " +
-                    "piece_volume, piece_weight, in_order, location, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    "piece_volume, piece_weight, in_order, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
     public static final String SQL_UPDATE_FANS =
             "UPDATE fans SET model_name = ?, producer_name = ?, quantity_in_stock = ?, piece_volume = ?, " +
-                    "piece_weight = ?, in_order= ?, location =?, description =? WHERE id= ?";
+                    "piece_weight = ?, in_order= ?, description =? WHERE id= ?";
     public static final  String SQL_GETSTOCK =
             "SELECT quantity_in_stock, free_stock FROM fans WHERE model_name =?";
-    public static final String DRIVER = ResourceBundle.getBundle("database").getString("db.driver");
 
     public FanDaoImpl(String DBProps){
         this.mysqlcon = new MysqlConnection(DBProps);
+    }
+
+    public FanDaoImpl(){
+        this.mysqlcon = new MysqlConnection("database");
     }
 
     @Override
@@ -48,10 +50,9 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 double weight = rs.getDouble("piece_weight");
                 int inOrder = rs.getInt("in_order");
                 int freeStock = rs.getInt("free_stock");
-                String location = rs.getString("location");
                 String description = rs.getString("description");
 
-                fans.add(new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, location, description));
+                fans.add(new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, description));
             }
         }
         catch (SQLException e){
@@ -76,9 +77,8 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 double weight = rs.getDouble("piece_weight");
                 int inOrder = rs.getInt("in_order");
                 int freeStock = rs.getInt("free_stock");
-                String location = rs.getString("location");
                 String description = rs.getString("description");
-                fan =  new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, location, description);
+                fan =  new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, description);
             }
         }
         catch (SQLException e){
@@ -88,13 +88,13 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
     }
 
     @Override
-    public List<Fan> findByModelName(String modelName) {
-        List<Fan> fans = new ArrayList<>();
+    public Fan findByModelName(String modelName) {
+        Fan fan = null;
         try(Connection connection = mysqlcon.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_FANS_MODELNAME)){
             preparedStatement.setString(1, modelName);
             ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()){
+            if (rs.next()){
                 int id = rs.getInt("id");
                 String producerName = rs.getString("producer_name");
                 int quantity = rs.getInt("quantity_in_stock");
@@ -102,18 +102,17 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 double weight = rs.getDouble("piece_weight");
                 int inOrder = rs.getInt("in_order");
                 int freeStock = rs.getInt("free_stock");
-                String location = rs.getString("location");
                 String description = rs.getString("description");
 
 
-                fans.add(new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, location, description));
+                fan = new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, description);
             }
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
         }
 
-        return fans;
+        return fan;
     }
 
     @Override
@@ -131,10 +130,9 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
                 double weight = rs.getDouble("piece_weight");
                 int inOrder = rs.getInt("in_order");
                 int freeStock = rs.getInt("free_stock");
-                String location = rs.getString("location");
                 String description = rs.getString("description");
 
-                fans.add(new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, location, description));
+                fans.add(new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, description));
             }
         }
         catch (SQLException e){
@@ -150,7 +148,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
         try (Connection connection = mysqlcon.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_FAN_ID)) {
             preparedStatement.setInt(1, id);
-            isDeleted = (preparedStatement.executeUpdate() == 1) ?  true :  false;
+            isDeleted = preparedStatement.executeUpdate() == 1;
 
 
         } catch (SQLException e) {
@@ -176,7 +174,7 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
 
     @Override
     public boolean create(Fan entity) {
-        boolean isAdded = false;
+        boolean isCreated = false;
         try (Connection connection = mysqlcon.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_FAN)) {
             preparedStatement.setString(1, entity.getModelName());
@@ -185,38 +183,37 @@ public class FanDaoImpl implements AbstractFanDao<Integer, String, Fan> {
             preparedStatement.setDouble(4, entity.getVolume());
             preparedStatement.setDouble(5, entity.getWeight());
             preparedStatement.setInt(6, entity.getInOrder());
-            preparedStatement.setString(7, entity.getLocation());
-            preparedStatement.setString(8, entity.getDescription());
-            isAdded = preparedStatement.executeUpdate() == 1;
+            preparedStatement.setString(7, entity.getDescription());
+            isCreated = preparedStatement.executeUpdate() == 1;
 
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return isAdded;
+        return isCreated;
     }
 
     @Override
-    public Fan update(Fan entity) {
+    public boolean update(Fan entity) {
+        boolean isUpdated = false;
         try (Connection connection = mysqlcon.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_FANS)) {
-            preparedStatement.setInt(9, entity.getId());
+            preparedStatement.setInt(8, entity.getId());
             preparedStatement.setString(1, entity.getModelName());
             preparedStatement.setString(2, entity.getProducerName());
             preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.setDouble(4, entity.getVolume());
             preparedStatement.setDouble(5, entity.getWeight());
             preparedStatement.setInt(6, entity.getInOrder());
-            preparedStatement.setString(7, entity.getLocation());
-            preparedStatement.setString(8, entity.getDescription());
+            preparedStatement.setString(7, entity.getDescription());
 
-            preparedStatement.executeUpdate();
+            isUpdated = preparedStatement.executeUpdate() == 1;
 
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return entity;
+        return isUpdated;
     }
 
 

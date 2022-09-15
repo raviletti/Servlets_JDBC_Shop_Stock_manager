@@ -7,7 +7,7 @@ public interface WarehouseServise <K extends Number, S extends String, T>{
 
     public abstract T findById(K id);
 
-    public abstract List<T> findByModelName(S name);
+    public abstract T findByModelName(S name);
 
     public abstract List<T> findByProducer(S producer);
 
@@ -17,6 +17,6 @@ public interface WarehouseServise <K extends Number, S extends String, T>{
 
     public abstract boolean create(T entity);
 
-    public abstract T update(T entity);
+    public abstract boolean update(T entity);
 
 }

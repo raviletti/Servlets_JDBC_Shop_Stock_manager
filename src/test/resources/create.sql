@@ -9,7 +9,6 @@ CREATE TABLE `test`.`fans` (
                                  piece_weight DOUBLE NOT NULL,
                                  `in_order` INT NOT NULL,
                                  free_stock INT AS (`quantity_in_stock` - `in_order`),
-                                 location VARCHAR(45) NOT NULL,
                                  description VARCHAR(45) DEFAULT NULL,
                                  PRIMARY KEY (`id`))
     DEFAULT CHARACTER SET = utf8;

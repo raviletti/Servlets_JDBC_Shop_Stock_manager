@@ -1,21 +1,3 @@
 1. Причесать фронт до минималистично-симпатичного вида
 2. Реализовать сервис для товара и, вероятно, для корзины
 3. Опционально: Переделать калькулятор в калькулятор доставки
-
-//Добавить подключение к БД в конструктор ДАО, чтобы не подключаться каждый раз из сервлетов
-
-public class ClientDAO {
-    public static Connection con;
-    public ClientDAO(){
-        if(con == null){
-            String dbUrl = "jdbc:mysql://localhost:3306/hotel";
-            String dbClass = "com.mysql.jdbc.Driver";
-            try {
-                Class.forName(dbClass);
-                con = DriverManager.getConnection (dbUrl, "root", "12345678");
-            }catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    }

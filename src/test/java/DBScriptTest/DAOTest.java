@@ -41,7 +41,6 @@ class DAOTest {
         //standard scenario
         fan = fdi.findById(2);
         assertNotNull(fan);
-        //'125 M', 'Vents',  '247', '0,2', '0,2', '10'
         assertEquals("125 M", fan.getModelName());
         assertEquals("Vents", fan.getProducerName());
         assertEquals(247, fan.getQuantity());
@@ -52,20 +51,19 @@ class DAOTest {
         FanDaoImpl fdi = new FanDaoImpl("testdb");
         //exception scenario 1
         String name = "xxxxxxxxxx";
-        List<Fan> fans = fdi.findByModelName(name);
-        assertNotNull(fans);
-        assertEquals(0, fans.size());
+        Fan fan = fdi.findByModelName(name);
+        assertNull(fan);
+
 
         //exception scenario 2
         name = "rn";
-        fans = fdi.findByModelName(name);
-        assertNotNull(fans);
-        assertEquals(0, fans.size());
+        fan = fdi.findByModelName(name);
+        assertNull(fan);
 
         name = "150 M";
-        fans = fdi.findByModelName(name);
-        assertNotNull(fans);
-        assertEquals(1, fans.size());
+        fan = fdi.findByModelName(name);
+        assertNotNull(fan);
+        assertEquals(name, fan.getModelName());
     }
 
     @Test
@@ -114,7 +112,7 @@ class DAOTest {
     public void testCreate(){
             FanDaoImpl fdi = new FanDaoImpl("testdb");
             Fan fan = new Fan(6,"Test fan", "Test producer", 120, 0.1, 0.1,
-                    10, 110, "Moscow", "Axial wall- and ceiling-mounted fans");
+                    10, 110, "Axial wall- and ceiling-mounted fans");
             fdi.create(fan);
             assertNotNull(fdi.findById(fan.getId()));
             assertTrue(5 < (fan.getId())); // test correct id
@@ -137,7 +135,6 @@ class DAOTest {
         double newVolume = 10.5223;
         double newWeight = 99.8889;
         int newInOrder = 5;
-        String newLocation = "Saints Petersburg";
         String newDescription = "Test description";
 
         fan.setModelName(newModelName);
@@ -146,7 +143,6 @@ class DAOTest {
         fan.setVolume(newVolume);
         fan.setWeight(newWeight);
         fan.setInOrder(newInOrder);
-        fan.setLocation(newLocation);
         fan.setDescription(newDescription);
         fdi.update(fan);
 
@@ -159,7 +155,6 @@ class DAOTest {
         assertEquals(newWeight, updatedFan.getWeight());
         assertEquals(newInOrder, updatedFan.getInOrder());
         assertEquals(newQuantity-newInOrder, updatedFan.getFreeStock());
-        assertEquals(newLocation, updatedFan.getLocation());
         assertEquals(newDescription, updatedFan.getDescription());
 
 

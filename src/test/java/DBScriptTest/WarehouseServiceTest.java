@@ -1,6 +1,5 @@
 package DBScriptTest;
 
-
 import model.Fan;
 import org.junit.jupiter.api.*;
 import service.WarehouseServiceImpl;
@@ -8,8 +7,10 @@ import service.WarehouseServiceImpl;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class WarehouseServiceTest {
+public class WarehouseServiceTest {
+    WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
     TestDBService testDBService = new TestDBService("testdb");
     @BeforeAll
     void beforeAll() {
@@ -23,7 +24,6 @@ class WarehouseServiceTest {
 
     @Test
     public void testFindAll(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
         List<Fan> fans = wsi.findAll();
         assertNotNull(fans);
         assertEquals(5, fans.size());
@@ -32,7 +32,6 @@ class WarehouseServiceTest {
 
     @Test
     public void testFindById(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
         //exception scenario
         Fan fan = wsi.findById(100);
         assertNull(fan);
@@ -48,28 +47,23 @@ class WarehouseServiceTest {
 
     @Test
     public void testFindByModelName(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
         //exception scenario 1
         String name = "xxxxxxxxxx";
-        List<Fan> fans = wsi.findByModelName(name);
-        assertNotNull(fans);
-        assertEquals(0, fans.size());
+        Fan fan = wsi.findByModelName(name);
+        assertNull(fan);
 
         //exception scenario 2
         name = "rn";
-        fans = wsi.findByModelName(name);
-        assertNotNull(fans);
-        assertEquals(0, fans.size());
+        fan = wsi.findByModelName(name);
+        assertNull(fan);
 
         name = "150 M";
-        fans = wsi.findByModelName(name);
-        assertNotNull(fans);
-        assertEquals(1, fans.size());
+        fan = wsi.findByModelName(name);
+        assertNotNull(fan);
     }
 
     @Test
     public void testFindByProducerName(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
         //exception scenario 1
         String producer = "xxxxxxxxxx";
         List<Fan> fans = wsi.findByProducer(producer);
@@ -90,7 +84,6 @@ class WarehouseServiceTest {
 
     @Test
     public void testDelete(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
         Fan fan = wsi.findById(2);
         wsi.delete(fan);
         assertEquals(4, wsi.findAll().size()); // test all row in the table
@@ -99,7 +92,6 @@ class WarehouseServiceTest {
 
     @Test
     public void testDeleteById(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
 
         wsi.deleteById(1);
         assertEquals(4, wsi.findAll().size()); // test all row in the table
@@ -111,11 +103,10 @@ class WarehouseServiceTest {
 
     @Test
     public void testCreate(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
 
         //test create row
-        Fan fan = new Fan(6,"Test fan", "Test producer", 120, 0.1, 0.1,
-                10, 110, "Moscow", "Axial wall- and ceiling-mounted fans");
+        Fan fan = new Fan(6,"Test fan", "Test producer", 999, 0.9, 0.9,
+                990, 9,  "Axial wall- and ceiling-mounted fans");
         wsi.create(fan);
         assertNotNull(wsi.findById(fan.getId()));
         assertTrue(5 < (fan.getId()));
@@ -128,42 +119,16 @@ class WarehouseServiceTest {
         assertEquals(fan.getQuantity(), foundFan.getQuantity());
 
         //test new inserted row with model name existing in table
-        Fan existingFan = new Fan("100 VKO", "Test producer", 120, 0.1, 0.1,
-                10,  "Samara", "Axial wall- and ceiling-mounted fans");
-        wsi.create(existingFan);
-        List<Fan> fansSameNames = wsi.findByModelName(existingFan.getModelName());
+        Fan existingFan = new Fan("100 VKO", "New producer", 200, 0.5, 0.5,
+                20, "New axial wall- and ceiling-mounted fans");
+        boolean isAdded = wsi.create(existingFan);
+        assertFalse(isAdded);
+        assertNotEquals(wsi.findByModelName("100 VKO"), existingFan);
         assertEquals(6, wsi.findAll().size());
-        assertEquals(1, fansSameNames.size());
-        assertEquals("Samara", fansSameNames.get(0).getLocation());
-        assertNotEquals(existingFan.getQuantity(), fansSameNames.get(0).getQuantity());
-
-        //test new inserted row with model name existing in table but second location
-        Fan fanMoscow = new Fan("125 M3", "Test producer", 20, 0.1, 0.1,
-                0,  "Moscow", "Axial wall- and ceiling-mounted fans");
-        wsi.create(fanMoscow);
-        List<Fan> fansSameNamesVariousLocations = wsi.findByModelName(fanMoscow.getModelName());
-        assertEquals(7, wsi.findAll().size());
-        assertEquals(2, fansSameNamesVariousLocations.size());
-        assertNotEquals(fansSameNamesVariousLocations.get(0).getLocation(), fansSameNamesVariousLocations.get(1).getLocation());
-
-        //test inserted row with model name existing in table but third location
-        Fan fanKazan = new Fan("125 M3", "Test producer", 20, 0.1, 0.1,
-                0,  "Kazan", "123");
-        wsi.create(fanKazan);
-        assertEquals(8, wsi.findAll().size());
-        assertEquals(3, wsi.findByModelName(fanKazan.getModelName()).size());
-
-        //test inserted row with model name existing in table when exist three location
-        Fan fanSamara = new Fan("125 M3", "Test producer", 20, 0.1, 0.1,
-                0,  "Samara","123");
-        wsi.create(fanSamara);
-        assertEquals(8, wsi.findAll().size());
-        assertEquals(3, wsi.findByModelName(fanSamara.getModelName()).size());
     }
 
     @Test
     public void testUpdate(){
-        WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
         Fan fan = wsi.findById(2);
         String newModelName = "newModelName";
         String newProducer = "newProducer";
@@ -171,7 +136,6 @@ class WarehouseServiceTest {
         double newVolume = 10.5223;
         double newWeight = 99.8889;
         int newInOrder = 5;
-        String newLocation = "Saints Petersburg";
         String newDescription = "Test description";
 
         fan.setModelName(newModelName);
@@ -180,7 +144,6 @@ class WarehouseServiceTest {
         fan.setVolume(newVolume);
         fan.setWeight(newWeight);
         fan.setInOrder(newInOrder);
-        fan.setLocation(newLocation);
         fan.setDescription(newDescription);
         wsi.update(fan);
 
@@ -193,7 +156,6 @@ class WarehouseServiceTest {
         assertEquals(newWeight, updatedFan.getWeight());
         assertEquals(newInOrder, updatedFan.getInOrder());
         assertEquals(newQuantity-newInOrder, updatedFan.getFreeStock());
-        assertEquals(newLocation, updatedFan.getLocation());
         assertEquals(newDescription, updatedFan.getDescription());
 
 
@@ -209,4 +171,5 @@ class WarehouseServiceTest {
     void afterAll(){
         testDBService.deleteTestTable();
     }
+
 }
