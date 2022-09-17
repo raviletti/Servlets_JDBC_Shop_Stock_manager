@@ -1,4 +1,4 @@
-package DBScriptTest;
+package ServiceTests;
 
 import model.Fan;
 import org.junit.jupiter.api.*;
@@ -7,7 +7,6 @@ import service.WarehouseServiceImpl;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class WarehouseServiceTest {
     WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");

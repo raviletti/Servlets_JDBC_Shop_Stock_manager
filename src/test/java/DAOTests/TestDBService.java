@@ -1,4 +1,4 @@
-package DBScriptTest;
+package DAOTests;
 
 
 import dao.MysqlConnection;

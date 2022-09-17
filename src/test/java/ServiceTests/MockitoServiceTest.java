@@ -1,4 +1,4 @@
-package DBScriptTest;
+package ServiceTests;
 
 import dao.FanDaoImpl;
 import model.Fan;
