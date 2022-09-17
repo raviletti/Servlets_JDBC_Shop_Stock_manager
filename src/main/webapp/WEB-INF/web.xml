@@ -6,9 +6,6 @@
          version="4.0">
 
 
-
-
-
   <context-param>
     <param-name>message</param-name>
     <param-value>Hello from context params!</param-value>

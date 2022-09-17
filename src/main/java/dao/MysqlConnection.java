@@ -1,5 +1,6 @@
 package dao;
 
+import com.mysql.cj.jdbc.Driver;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
@@ -16,6 +17,7 @@ public class MysqlConnection {
     private int port;
     private String database;
     private String connectionString;
+    private String driver;
 
     public MysqlConnection(String DBProperties) {
         this.resource =  ResourceBundle.getBundle(DBProperties);
@@ -25,17 +27,19 @@ public class MysqlConnection {
         this.port = Integer.parseInt(resource.getString("db.port"));
         this.database = resource.getString("db.name");
         this.connectionString = resource.getString("db.url");
+        this.driver = resource.getString("db.driver");
     }
 
     public Connection getConnection() throws SQLException{
         return getDatasource().getConnection();
     }
 
-    public  DataSource getDatasource(){
+    public  DataSource getDatasource() throws SQLException {
         BasicDataSource ds = new BasicDataSource();
         ds.setUrl(connectionString + database);
         ds.setUsername(user);
         ds.setPassword(password);
+        ds.setDriver(new Driver());
         //pool default size
         ds.setInitialSize(2);
         return ds;

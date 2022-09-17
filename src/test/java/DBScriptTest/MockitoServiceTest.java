@@ -39,7 +39,7 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestFindAllMockShouldReturnTrue(){
+    void testFindAllMockShouldReturnTrue(){
         given(fdi.findAll()).willReturn(List.of(fan, fan2));
         List<Fan> fans = wsi.findAll();
         assertEquals(2, fans.size());
@@ -49,7 +49,7 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestFindAllMockShouldReturnFalse(){
+    void testFindAllMockShouldReturnFalse(){
         given(fdi.findAll()).willReturn(new ArrayList<>());
         List<Fan> fans = wsi.findAll();
         assertNotNull(fans);
@@ -58,7 +58,7 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestFindByIdMocksShouldReturnTrue(){
+    void testFindByIdMocksShouldReturnNotNull(){
         given(fdi.findById(fan.getId())).willReturn(fan);
         Fan foundFan = wsi.findById(fan.getId());
         assertNotNull(foundFan);
@@ -67,7 +67,7 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestFindByIdMocksShouldReturnFalse(){
+    void testFindByIdMocksShouldReturnNull(){
         given(fdi.findById(5)).willReturn(null);
         Fan foundFan = wsi.findById(5);
         assertNull(foundFan);
@@ -76,22 +76,24 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestFindByModelNameShouldReturnTrue(){
+    void testFindByModelNameShouldReturnTrue(){
         given(fdi.findByModelName(fan.getModelName())).willReturn(fan);
         Fan foundFan = wsi.findByModelName("Test fan");
         assertNotNull(foundFan);
         assertEquals("Test fan", foundFan.getModelName());
+        verify(fdi, times(1)).findByModelName("Test fan");
     }
 
     @Test
-    void TestFindByModelNameShouldReturnFalse(){
+    void testFindByModelNameShouldReturnFalse(){
         when(fdi.findByModelName(anyString())).thenReturn(null);
         Fan notFoundFan = wsi.findByModelName("NotExistName");
         assertNull(notFoundFan);
+        verify(fdi, times(1)).findByModelName("NotExistName");
     }
 
     @Test
-    public void testFindByProducerNameShouldReturnTrue(){
+     void testFindByProducerNameShouldReturnTrue(){
         String producer = "Test producer";
         given(fdi.findByProducer(producer)).willReturn(List.of(fan, fan2));
         List<Fan> fans = wsi.findByProducer(producer);
@@ -100,8 +102,10 @@ public class MockitoServiceTest {
         verify(fdi, times(1)).findByProducer(anyString());
     }
 
+
+
     @Test
-    public void testFindByProducerNameShouldReturnFalse(){
+     void testFindByProducerNameShouldReturnFalse(){
         String producer = "Not exist producer";
         given(fdi.findByProducer(producer)).willReturn(List.of());
         List<Fan> fans = wsi.findByProducer(producer);
@@ -111,7 +115,7 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestDeleteById(){
+    void testDeleteById(){
         List<Fan> fans = new ArrayList<>(List.of(fan, fan2));
         given(fdi.findAll()).willReturn(fans);
         when(fdi.deleteById(fan.getId())).thenReturn(fans.remove(fan));
@@ -122,7 +126,7 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestDelete(){
+    void testDelete(){
         List<Fan> fans = new ArrayList<>(List.of(fan, fan2));
         given(fdi.findAll()).willReturn(fans);
         when(fdi.delete(fan)).thenReturn(fans.remove(fan));
@@ -133,22 +137,22 @@ public class MockitoServiceTest {
     }
 
     @Test
-    void TestCreateShouldReturnTrue(){
+    void testCreateShouldReturnTrue(){
         when(fdi.create(fan)).thenReturn(true);
         boolean isFanCreated = wsi.create(fan);
         assertTrue(isFanCreated);
-        verify(fdi, times(1)).create(fan);
         verify(fdi, times(1)).findByModelName(fan.getModelName());
+        verify(fdi, times(1)).create(fan);
     }
 
 
     @Test
-    void TestCreateSameNameShouldReturnFalse(){
+    void testCreateSameNameShouldReturnFalse(){
         given(fdi.findByModelName(fan2.getModelName())).willReturn(fan);
         boolean isFanCreated = wsi.create(fan2);
         assertFalse(isFanCreated);
-        verify(fdi, times(0)).create(fan);
         verify(fdi, times(1)).findByModelName(fan2.getModelName());
+        verify(fdi, times(0)).create(fan);
     }
 
     @Test

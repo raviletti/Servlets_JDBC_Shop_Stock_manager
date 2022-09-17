@@ -20,6 +20,9 @@ public class CalculatorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
+
+        //add a service instead of model obj
+
         Calculator calcModel = new Calculator();
         String result = calcModel.calculating(
                 request.getParameter("NumberOne"),

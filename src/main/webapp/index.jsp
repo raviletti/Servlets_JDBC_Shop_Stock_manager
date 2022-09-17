@@ -15,6 +15,9 @@
 <br>
 <a href=\Calculator>
     <button style='font-size:20px'>Calculator</button></a>
+<br>
+<a href=\Warehouse>
+    <button style='font-size:20px'>Warehouse</button></a>
 
 
 </body>
