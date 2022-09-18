@@ -21,16 +21,14 @@ public class WarehouseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getServletPath();
-
         try {
             switch (action) {
-                case "/Warehouse" -> listFan(req, resp);
                 case "/Warehouse/new" -> showNewForm(req, resp);
                 case "/Warehouse/create" -> createFan(req, resp);
                 case "/Warehouse/delete" -> deleteFan(req, resp);
                 case "/Warehouse/edit" -> showEditForm(req, resp);
                 case "/Warehouse/update" -> update(req, resp);
-                default -> home(req, resp);
+                default -> listFan(req, resp);
             }
 
 
@@ -41,11 +39,6 @@ public class WarehouseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
-    }
-
-    private void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
     }
 
     private void listFan(HttpServletRequest request, HttpServletResponse response)

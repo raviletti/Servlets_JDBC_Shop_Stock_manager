@@ -20,7 +20,7 @@
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: tomato">
+         style="background-color: black">
         <div>
             <a href=/Homepage class="navbar-brand"> Goods
                 Management App </a>
@@ -28,7 +28,7 @@
 
         <ul class="navbar-nav">
             <li><a href="<%=request.getContextPath()%>/Warehouse"
-                   class="nav-link">Goods</a></li>
+                   class="nav-link">Warehouse</a></li>
         </ul>
     </nav>
 </header>
@@ -40,7 +40,7 @@
         <hr>
         <div class="container text-left">
 
-            <a href="Warehouse/new" class="btn btn-success">Add
+            <a href="Warehouse/new" class="btn btn-outline-dark">Add
                 New Good</a>
         </div>
         <br>

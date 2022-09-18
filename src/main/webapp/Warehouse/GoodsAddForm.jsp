@@ -20,14 +20,14 @@
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: grey">
+         style="background-color: black">
         <div>
             <a href="/Homepage" class="navbar-brand"> Good Management App </a>
         </div>
 
         <ul class="navbar-nav">
             <li><a href="/Warehouse"
-                   class="nav-link">Goods</a></li>
+                   class="nav-link">Warehouse</a></li>
         </ul>
     </nav>
 </header>
@@ -99,7 +99,7 @@
                                                                name="description">
                         </fieldset>
 
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-outline-dark">Save</button>
                 </form>
         </div>
     </div>
