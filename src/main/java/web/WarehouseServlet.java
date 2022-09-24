@@ -88,8 +88,9 @@ public class WarehouseServlet extends HttpServlet {
         double volume = Double.parseDouble(request.getParameter("volume"));
         double weight = Double.parseDouble(request.getParameter("weight"));
         int inOrder = Integer.parseInt(request.getParameter("inOrder"));
+        int freeStock = quantity - inOrder;
         String description = request.getParameter("description");
-        Fan updFan = new Fan(modelName, producerName, quantity, volume, weight, inOrder, description);
+        Fan updFan = new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, description);
         wsi.update(updFan);
         response.sendRedirect("/Warehouse");
     }
