@@ -7,18 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <title>Homepage</title>
+    <jsp:include page="/Header.jsp" />
+    <jsp:include page="/contact.jsp" />
 </head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <body>
-<br>
-<a href=\Calculator>
-    <button style='font-size:20px'>Calculator</button></a>
-<br>
-<a href=\Warehouse>
-    <button style='font-size:20px'>Warehouse</button></a>
 
+<h5 style="margin-left: 30px">Homepage</h5>
 
 </body>
 </html>

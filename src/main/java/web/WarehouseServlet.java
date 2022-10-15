@@ -17,25 +17,25 @@ import java.util.List;
 public class WarehouseServlet extends HttpServlet {
     WarehouseServiceImpl wsi = new WarehouseServiceImpl();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String action = req.getServletPath();
-        try {
-            switch (action) {
-                case "/Warehouse/new" -> showNewForm(req, resp);
-                case "/Warehouse/create" -> createFan(req, resp);
-                case "/Warehouse/delete" -> deleteFan(req, resp);
-                case "/Warehouse/edit" -> showEditForm(req, resp);
-                case "/Warehouse/update" -> update(req, resp);
-                default -> listFan(req, resp);
+            String action = req.getServletPath();
+            try {
+                switch (action) {
+                    case "/Warehouse/new" -> showNewForm(req, resp);
+                    case "/Warehouse/create" -> createFan(req, resp);
+                    case "/Warehouse/delete" -> deleteFan(req, resp);
+                    case "/Warehouse/edit" -> showEditForm(req, resp);
+                    case "/Warehouse/update" -> update(req, resp);
+                    default -> listFan(req, resp);
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);

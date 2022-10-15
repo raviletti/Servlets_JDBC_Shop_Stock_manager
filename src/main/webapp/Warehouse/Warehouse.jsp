@@ -19,18 +19,21 @@
 <body>
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark"
-         style="background-color: black">
-        <div>
-            <a href=/Homepage class="navbar-brand"> Goods
-                Management App </a>
-        </div>
+<%--    <nav class="navbar navbar-expand-md navbar-dark"--%>
+<%--         style="background-color: black">--%>
+<%--        <div>--%>
+<%--            <a href=/Homepage class="navbar-brand"> Goods--%>
+<%--                Management App </a>--%>
+<%--        </div>--%>
 
-        <ul class="navbar-nav">
-            <li><a href="<%=request.getContextPath()%>/Warehouse"
-                   class="nav-link">Warehouse</a></li>
-        </ul>
-    </nav>
+<%--        <ul class="navbar-nav">--%>
+<%--            <li><a href="<%=request.getContextPath()%>/Warehouse"--%>
+<%--                   class="nav-link">Warehouse</a></li>--%>
+<%--        </ul>--%>
+<%--    </nav>--%>
+
+    <jsp:include page="/Header.jsp" />
+    <jsp:include page="/contact.jsp" />
 </header>
 <br>
 
