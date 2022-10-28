@@ -2,14 +2,14 @@ package ServiceTests;
 
 import model.Fan;
 import org.junit.jupiter.api.*;
-import service.WarehouseServiceImpl;
+import service.StockManagerServiceImpl;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class WarehouseServiceTest {
-    WarehouseServiceImpl wsi = new WarehouseServiceImpl("testdb");
+public class StockManagerServiceTest {
+    StockManagerServiceImpl wsi = new StockManagerServiceImpl("testdb");
     TestDBService testDBService = new TestDBService("testdb");
     @BeforeAll
     void beforeAll() {

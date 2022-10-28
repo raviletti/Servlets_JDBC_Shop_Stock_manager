@@ -5,18 +5,18 @@ import model.Fan;
 
 import java.util.List;
 
-public class WarehouseServiceImpl implements WarehouseServise<Integer, String, Fan> {
+public class StockManagerServiceImpl implements StockManagerService<Integer, String, Fan> {
     private FanDaoImpl fdi;
 
-    public WarehouseServiceImpl(String properties) {
+    public StockManagerServiceImpl(String properties) {
         this.fdi = new FanDaoImpl(properties);
     }
 
-    public WarehouseServiceImpl(FanDaoImpl fdi){
+    public StockManagerServiceImpl(FanDaoImpl fdi){
         this.fdi = fdi;
     }
 
-    public WarehouseServiceImpl(){
+    public StockManagerServiceImpl(){
     this.fdi = new FanDaoImpl("database");
     }
 

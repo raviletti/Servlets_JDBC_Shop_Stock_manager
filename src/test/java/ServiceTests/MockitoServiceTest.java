@@ -9,7 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import service.WarehouseServiceImpl;
+import service.StockManagerServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class MockitoServiceTest {
     @Mock
     FanDaoImpl fdi;
     @InjectMocks
-    WarehouseServiceImpl wsi;
+    StockManagerServiceImpl wsi;
 
     @BeforeAll
     void before(){

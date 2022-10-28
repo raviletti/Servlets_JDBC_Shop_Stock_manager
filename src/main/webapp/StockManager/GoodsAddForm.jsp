@@ -26,8 +26,8 @@
         </div>
 
         <ul class="navbar-nav">
-            <li><a href="/Warehouse"
-                   class="nav-link">Warehouse</a></li>
+            <li><a href="/Stockmanager"
+                   class="nav-link">Stock Manager</a></li>
         </ul>
     </nav>
 </header>

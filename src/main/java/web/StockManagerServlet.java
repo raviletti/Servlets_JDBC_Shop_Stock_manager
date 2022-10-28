@@ -1,7 +1,7 @@
 package web;
 
 import model.Fan;
-import service.WarehouseServiceImpl;
+import service.StockManagerServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/Warehouse","/Warehouse/new","/Warehouse/create","/Warehouse/delete","/Warehouse/edit","/Warehouse/update"})
-public class WarehouseServlet extends HttpServlet {
-    WarehouseServiceImpl wsi = new WarehouseServiceImpl();
+@WebServlet(urlPatterns = {"/Stockmanager","/Stockmanager/new","/Stockmanager/create","/Stockmanager/delete","/Stockmanager/edit","/Stockmanager/update"})
+public class StockManagerServlet extends HttpServlet {
+    StockManagerServiceImpl wsi = new StockManagerServiceImpl();
 
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,11 +23,11 @@ public class WarehouseServlet extends HttpServlet {
             String action = req.getServletPath();
             try {
                 switch (action) {
-                    case "/Warehouse/new" -> showNewForm(req, resp);
-                    case "/Warehouse/create" -> createFan(req, resp);
-                    case "/Warehouse/delete" -> deleteFan(req, resp);
-                    case "/Warehouse/edit" -> showEditForm(req, resp);
-                    case "/Warehouse/update" -> update(req, resp);
+                    case "/Stockmanager/new" -> showNewForm(req, resp);
+                    case "/Stockmanager/create" -> createFan(req, resp);
+                    case "/Stockmanager/delete" -> deleteFan(req, resp);
+                    case "/Stockmanager/edit" -> showEditForm(req, resp);
+                    case "/Stockmanager/update" -> update(req, resp);
                     default -> listFan(req, resp);
                 }
 
@@ -45,13 +45,13 @@ public class WarehouseServlet extends HttpServlet {
             throws IOException, ServletException {
         List<Fan> listFan = wsi.findAll();
         request.setAttribute("listFan", listFan);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Warehouse/Warehouse.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/StockManager/StockManager.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Warehouse/GoodsAddForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/StockManager/GoodsAddForm.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -59,7 +59,7 @@ public class WarehouseServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Fan existingFan = wsi.findById(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Warehouse/GoodsAddForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/StockManager/GoodsAddForm.jsp");
         request.setAttribute("fan", existingFan);
         dispatcher.forward(request, response);
 
@@ -76,7 +76,7 @@ public class WarehouseServlet extends HttpServlet {
         String description = request.getParameter("description");
         Fan newFan = new Fan(modelName, producerName, quantity, volume, weight, inOrder, description);
         wsi.create(newFan);
-        response.sendRedirect("/Warehouse");
+        response.sendRedirect("/Stockmanager");
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response)
@@ -92,14 +92,14 @@ public class WarehouseServlet extends HttpServlet {
         String description = request.getParameter("description");
         Fan updFan = new Fan(id, modelName, producerName, quantity, volume, weight, inOrder, freeStock, description);
         wsi.update(updFan);
-        response.sendRedirect("/Warehouse");
+        response.sendRedirect("/Stockmanager");
     }
 
     private void deleteFan(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         wsi.deleteById(id);
-        response.sendRedirect("/Warehouse");
+        response.sendRedirect("/Stockmanager");
 
     }
 }

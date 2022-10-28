@@ -10,7 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Warehouse</title>
+    <title>Stock Manager</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -19,18 +19,6 @@
 <body>
 
 <header>
-<%--    <nav class="navbar navbar-expand-md navbar-dark"--%>
-<%--         style="background-color: black">--%>
-<%--        <div>--%>
-<%--            <a href=/Homepage class="navbar-brand"> Goods--%>
-<%--                Management App </a>--%>
-<%--        </div>--%>
-
-<%--        <ul class="navbar-nav">--%>
-<%--            <li><a href="<%=request.getContextPath()%>/Warehouse"--%>
-<%--                   class="nav-link">Warehouse</a></li>--%>
-<%--        </ul>--%>
-<%--    </nav>--%>
 
     <jsp:include page="/Header.jsp" />
     <jsp:include page="/contact.jsp" />
@@ -43,7 +31,7 @@
         <hr>
         <div class="container text-left">
 
-            <a href="Warehouse/new" class="btn btn-outline-dark">Add
+            <a href="Stockmanager/new" class="btn btn-outline-dark">Add
                 New Good</a>
         </div>
         <br>
@@ -73,9 +61,9 @@
                     <td><c:out value="${fan.inOrder}" /></td>
                     <td><c:out value="${fan.freeStock}" /></td>
                     <td><c:out value="${fan.description}" /></td>
-                    <td><a href="Warehouse/edit?id=<c:out value='${fan.id}' />">Edit</a>
+                    <td><a href="Stockmanager/edit?id=<c:out value='${fan.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="Warehouse/delete?id=<c:out value='${fan.id}' />">Delete</a></td>
+                                href="Stockmanager/delete?id=<c:out value='${fan.id}' />">Delete</a></td>
                 </tr>
             </c:forEach>
             <!-- } -->

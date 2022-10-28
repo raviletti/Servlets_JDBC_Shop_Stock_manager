@@ -28,7 +28,7 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Warehouse">Warehouse</a>
+            <a class="nav-link" href="/Stockmanager">Stock Manager</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/Shop">Shop</a>

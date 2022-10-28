@@ -16,7 +16,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <body>
 
-<h5 style="margin-left: 30px">Homepage</h5>
+<h2 style="margin-left: 30px">Homepage</h2>
 
+<h6 style="margin-left: 30px">Simple online store created with Java Servlets, JSP and with stock management using jdbc and MySQL
+
+    Tests on JUnit and Mockito</h6>
 </body>
 </html>

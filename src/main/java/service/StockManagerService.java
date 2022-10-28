@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-public interface WarehouseServise <K extends Number, S extends String, T>{
+public interface StockManagerService<K extends Number, S extends String, T>{
     public abstract List<T> findAll();
 
     public abstract T findById(K id);
