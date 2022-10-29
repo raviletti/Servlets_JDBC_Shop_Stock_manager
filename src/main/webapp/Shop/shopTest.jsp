@@ -55,6 +55,7 @@
         margin-bottom: 12px;
     }
     .button {
+        border: 2px solid black;
         text-decoration: none;
         display: inline-block;
         padding: 0 12px;
@@ -68,7 +69,6 @@
     .product-item:hover .button {
         background: #fc5a5a;
     }
-
     #shading {
         background: rgba(102, 102, 102, 0.5);
         width: 100%;
@@ -80,7 +80,7 @@
     }
     #window {
         width: 200px;
-        height: 100px;
+        height: 160px;
         text-align: center;
         padding: 15px;
         border: 3px solid black;
@@ -95,100 +95,36 @@
         background: white;
     }
     #shading:target {display: block;}
-    .close {
-        display: inline-block;
-        border: 1px solid #0000cc;
-        color: black;
-        padding: 0 12px;
-        margin: 10px;
-        text-decoration: none;
-        background: #f2f2f2;
-        font-size: 14pt;
-        cursor:pointer;
-    }
-    .close:hover {background: #e6e6ff;}
-
-
-
 </style>
 
-<div class="wrap">
 
+<div class="wrap">
     <div class="product-item">
 
-        <img src="/views/M.jpg">
+        <img src="https://vents-rus.ru/image/data/data/448_b.jpg">
         <div class="product-list">
             <h3>Fan M Series ⌀100</h3>
             <span class="price">₽ 1546</span>
             <a href="#shading" class="button">Add to cart</a>
         </div>
-
-        <img src="/views/VKO.jpg">
-        <div class="product-list">
-            <h3>Fan VKO Series ⌀100</h3>
-            <span class="price">₽ 1239</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
-
-        <img src="/views/M3.jpg">
-        <div class="product-list">
-            <h3>Fan M3 Series ⌀100</h3>
-            <span class="price">₽ 2548</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
-    </div>
-
-    <div class="product-item">
-
-        <img src="/views/M.jpg">
-        <div class="product-list">
-            <h3>Fan M Series ⌀125</h3>
-            <span class="price">₽ 1905</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
-
-        <img src="/views/VKO.jpg">
-        <div class="product-list">
-            <h3>Fan VKO Series ⌀125</h3>
-            <span class="price">₽ 1438</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
-
-        <img src="/views/M3.jpg">
-        <div class="product-list">
-            <h3>Fan M3 Series ⌀125</h3>
-            <span class="price">₽ 3034</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
-    </div>
-
-    <div class="product-item">
-
-        <img src="/views/M.jpg">
-        <div class="product-list">
-            <h3>Fan M Series ⌀150</h3>
-            <span class="price">₽ 3119</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
-
-        <img src="/views/VKO.jpg">
-        <div class="product-list">
-            <h3>Fan VKO Series ⌀150</h3>
-            <span class="price">₽ 2007</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
-
-        <img src="/views/M3.jpg">
-        <div class="product-list">
-            <h3>Fan M3 Series ⌀150</h3>
-            <span class="price">₽ 4392</span>
-            <a href="" class="button">Add to cart</a>
-        </div>
     </div>
 
 
 
-
+<div id="shading">
+    <div id="window">
+        100 M <p>
+        <form action="/Cart" method="POST">
+            <p>
+                <label for="count">Count: </label>
+                <input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+                <input type="hidden" name="model" value="100 M" />
+        <p>
+        <button type="submit" class="btn btn-outline-dark">Add</button>
+        <a class="btn btn-outline-dark" href="#" role="button">Cancel</a>
+    </form>
+    </div>
+</div>
 </div>
 </body>
 </html>
