@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.Objects;
+
 public class Fan extends AbstractProduct {
     private int id;
     private String modelName;
@@ -35,6 +37,13 @@ public class Fan extends AbstractProduct {
         this.weight = weight;
         this.inOrder = inOrder;
         this.description = description;
+    }
+
+    public Fan(String modelName, String producerName, int quantity, double price) {
+        this.modelName = modelName;
+        this.producerName = producerName;
+        this.quantity = quantity;
+        this.price = price;
     }
 
     @Override
@@ -137,5 +146,18 @@ public class Fan extends AbstractProduct {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        return Objects.equals(this.getModelName(), ((Fan) obj).getModelName()) && this.getProducerName().equals(((Fan) obj).getProducerName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(modelName, producerName);
     }
 }

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.Cart" %><%--
   Created by IntelliJ IDEA.
   User: ravil
   Date: 16.09.2022
@@ -27,44 +27,43 @@
 
 <div class="row">
 	<div class="container">
-		<h3 class="text-center">List of Goods</h3>
+		<h3 class="text-center">Cart</h3>
 		<hr>
 		<br>
 		<table class="table table-bordered">
 			<thead>
 			<tr>
-				<th>ID</th>
 				<th>Model</th>
 				<th>Producer</th>
 				<th>Quantity</th>
-				<th>Volume (for piece)</th>
-				<th>Weight (for piece)</th>
-				<th>In order</th>
-				<th>Free stock</th>
-				<th>Description</th>
+				<th>Price</th>
+				<th>Total</th>
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="fan" items="${listFan}">
+			<c:forEach var="fan" items="${fanList}">
 				<tr>
-					<td><c:out value="${fan.id}" /></td>
 					<td><c:out value="${fan.modelName}" /></td>
 					<td><c:out value="${fan.producerName}" /></td>
 					<td><c:out value="${fan.quantity}" /></td>
-					<td><c:out value="${fan.volume}" /></td>
-					<td><c:out value="${fan.weight}" /></td>
-					<td><c:out value="${fan.inOrder}" /></td>
-					<td><c:out value="${fan.freeStock}" /></td>
-					<td><c:out value="${fan.description}" /></td>
-					<td><a href="Stockmanager/edit?id=<c:out value='${fan.id}' />">Edit</a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="Stockmanager/delete?id=<c:out value='${fan.id}' />">Delete</a></td>
+					<td><c:out value="${fan.price}" /></td>
+					<td><c:out value="${fan.price*fan.quantity}" /></td>
+
+					<td> <a href="Cart/delete?model=<c:out value='${fan.modelName}' />&producer=<c:out value='${fan.producerName}' />">Delete</a></td>
 				</tr>
 			</c:forEach>
 			<!-- } -->
 			</tbody>
 
 		</table>
+		<%Cart cart = (Cart) session.getAttribute("cart"); %>
+		<c:if test="${cart == null}">
+			<p>Total: 0.0</p>
+		</c:if>
+		<c:if test="${cart != null && sum != 0.0}">
+			<%= "Total: " + cart.getTotal()%>
+		</c:if>
+
 	</div>
 </div>
 </body>

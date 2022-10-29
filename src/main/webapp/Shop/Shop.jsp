@@ -82,9 +82,11 @@
 			<span class="price">₽ 1546</span>
 			<form id="100M" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="100 M" />
+					<input type="hidden" name="producer" value="Vents" />
+					<input type="hidden" name="price" value="1546" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
 			</form>
@@ -96,8 +98,8 @@
 			<span class="price">₽ 1239</span>
 			<form id="100VKO" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="100 VKO" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
@@ -110,8 +112,8 @@
 			<span class="price">₽ 2548</span>
 			<form id="100M3" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="100 M3" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
@@ -127,8 +129,8 @@
 			<span class="price">₽ 1905</span>
 			<form id="125M" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="125 M" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
@@ -141,8 +143,8 @@
 			<span class="price">₽ 1438</span>
 			<form id="125VKO" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="125 VKO" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
@@ -155,8 +157,8 @@
 			<span class="price">₽ 3034</span>
 			<form id="125M3" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="125 M3" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
@@ -172,8 +174,8 @@
 			<span class="price">₽ 3119</span>
 			<form id="150M" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="150 M" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
@@ -186,8 +188,8 @@
 			<span class="price">₽ 2007</span>
 			<form id="150VKO" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="150 VKO" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
@@ -200,8 +202,8 @@
 			<span class="price">₽ 4392</span>
 			<form id="150M3" action="/Cart" method="POST">
 				<p>
-					<label for="count">Count: </label>
-					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<label>Quantity: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" name="quantity"/>
 					<input type="hidden" name="model" value="150 M3" />
 				<p>
 					<button type="submit" class="button">Add to cart</button>
