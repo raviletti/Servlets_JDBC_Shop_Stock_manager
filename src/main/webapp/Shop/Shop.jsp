@@ -80,21 +80,42 @@
 		<div class="product-list">
 			<h3>Fan M Series ⌀100</h3>
 			<span class="price">₽ 1546</span>
-			<a href="/Cart/add?model=100 M" class="button">Add to cart</a>
+			<form id="100M" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="100 M" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 
 		<img src="/views/VKO.jpg">
 		<div class="product-list">
 			<h3>Fan VKO Series ⌀100</h3>
 			<span class="price">₽ 1239</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="100VKO" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="100 VKO" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 
 		<img src="/views/M3.jpg">
 		<div class="product-list">
 			<h3>Fan M3 Series ⌀100</h3>
 			<span class="price">₽ 2548</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="100M3" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="100 M3" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 	</div>
 
@@ -104,21 +125,42 @@
 		<div class="product-list">
 			<h3>Fan M Series ⌀125</h3>
 			<span class="price">₽ 1905</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="125M" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="125 M" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 
 		<img src="/views/VKO.jpg">
 		<div class="product-list">
 			<h3>Fan VKO Series ⌀125</h3>
 			<span class="price">₽ 1438</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="125VKO" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="125 VKO" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 
 		<img src="/views/M3.jpg">
 		<div class="product-list">
 			<h3>Fan M3 Series ⌀125</h3>
 			<span class="price">₽ 3034</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="125M3" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="125 M3" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 	</div>
 
@@ -128,21 +170,42 @@
 		<div class="product-list">
 			<h3>Fan M Series ⌀150</h3>
 			<span class="price">₽ 3119</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="150M" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="150 M" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 
 		<img src="/views/VKO.jpg">
 		<div class="product-list">
 			<h3>Fan VKO Series ⌀150</h3>
 			<span class="price">₽ 2007</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="150VKO" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="150 VKO" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 
 		<img src="/views/M3.jpg">
 		<div class="product-list">
 			<h3>Fan M3 Series ⌀150</h3>
 			<span class="price">₽ 4392</span>
-			<a href="" class="button">Add to cart</a>
+			<form id="150M3" action="/Cart" method="POST">
+				<p>
+					<label for="count">Count: </label>
+					<input type="number" step="1" min="1" max="10000" value="1" id="count" name="count"/>
+					<input type="hidden" name="model" value="150 M3" />
+				<p>
+					<button type="submit" class="button">Add to cart</button>
+			</form>
 		</div>
 	</div>
 

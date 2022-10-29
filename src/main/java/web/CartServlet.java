@@ -25,7 +25,7 @@ public class CartServlet extends HttpServlet {
 		String count = req.getParameter("count");
 		String model = req.getParameter("model");
 		//add to cart model logic
-		System.out.println(model + " " + count);
+		System.out.println("model: " + model + " " + "count: " + count);
 		resp.sendRedirect(req.getHeader("referer"));
 	}
 }
