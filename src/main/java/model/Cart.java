@@ -20,16 +20,20 @@ public class Cart {
         return fanList;
     }
 
-    public double getTotal(){
-        sum = 0;
-        for(Fan fan : fanList){
-           sum += fan.getPrice() * fan.getQuantity();
-        }
+    public double getSum() {
         return sum;
     }
 
-    public double getTotalStream(){
-        return fanList.stream().mapToDouble(Fan::getPrice).sum();
+    public boolean isCartEmpty(){
+        sum = 0.0;
+        for(Fan fan : fanList){
+           sum += fan.getPrice() * fan.getQuantity();
+        }
+        if(sum <= 0.0){
+            return true;
+        }
+        else return false;
     }
+
 
 }

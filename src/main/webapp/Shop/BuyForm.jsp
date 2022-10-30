@@ -37,12 +37,33 @@
             width: 150px;
         }
 
+        .open-button-buy {
+            background-color: #000000;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 90px;
+            right: 28px;
+            width: 150px;
+        }
+
         /* Всплывающая форма-скрыта по умолчанию */
         .form-popup {
             display: none;
             position: fixed;
             bottom: 0;
-            right: 15px;
+            right: 21px;
+            border: 3px solid #f1f1f1;
+        }
+
+        .form-popup-buy {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 115px;
             border: 3px solid #f1f1f1;
         }
 
@@ -52,7 +73,6 @@
             padding: 10px;
             background-color: white;
         }
-
         /* Поля ввода полной ширины */
         .form-container input[type=text], .form-container input[type=password] {
             width: 100%;
@@ -62,13 +82,11 @@
             background: white;
             outline: 1px solid #808080;
         }
-
         /* Когда входы получают фокус, сделайте что-нибудь */
         .form-container input[type=text]:focus, .form-container input[type=password]:focus {
             background-color: #ddd;
             outline: none;
         }
-
         /* Установите стиль для кнопки отправить/кнопка */
         .form-container .btn {
             background-color: #000000;
@@ -80,17 +98,14 @@
             margin-bottom:10px;
             opacity: 0.8;
         }
-
         /* Добавьте красный цвет фона к кнопке отмена */
         .form-container .cancel {
             background-color: #000000;
         }
-
         /* Добавьте некоторые эффекты наведения на кнопки */
         .form-container .btn:hover, .open-button:hover {
             opacity: 1;
         }
-
         .colortext {
             background-color: white; /* Цвет фона */
         }
@@ -98,17 +113,21 @@
 </head>
 <body>
 
-<button class="open-button" onclick="openForm()">Contact us</button>
 
+<button class="open-button-buy" onclick="openForm()">Buy</button>
+<button class="open-button" onclick="openForm()">Contact us</button>
 <div class="form-popup" id="myForm">
     <form action="/Contact" method="post" class="form-container">
-        <h1>Contact Us</h1>
+        <%--@declare id="email"--%><%--@declare id="name"--%><%--@declare id="phone"--%><h1>Contact Us</h1>
 
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Email" name="email" required>
 
-        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Name" name="name" required>
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Name" name="name" required>
+
+            <label for="phone"><b>Phone number</b></label>
+            <input type="number" placeholder="Phone number" name="phone" required>
 
 
 

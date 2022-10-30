@@ -63,7 +63,7 @@
                     <td><c:out value="${fan.description}" /></td>
                     <td><a href="Stockmanager/edit?id=<c:out value='${fan.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="Stockmanager/delete?id=<c:out value='${fan.id}' />">Delete</a></td>
+                                href="Stockmanager/delete?id=<c:out value='${fan.id}' />" >Delete</a></td>
                 </tr>
             </c:forEach>
             <!-- } -->

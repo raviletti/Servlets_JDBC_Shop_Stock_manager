@@ -1,4 +1,6 @@
-<%@ page import="model.Cart" %><%--
+<%@ page import="model.Cart" %>
+<%@ page import="model.Fan" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: ravil
   Date: 16.09.2022
@@ -21,7 +23,7 @@
 <header>
 
 	<jsp:include page="/Header.jsp" />
-	<jsp:include page="/contact.jsp" />
+<%--	<jsp:include page="/Shop/testbuy.jsp" />--%>
 </header>
 <br>
 
@@ -56,15 +58,28 @@
 			</tbody>
 
 		</table>
+
 		<%Cart cart = (Cart) session.getAttribute("cart"); %>
-		<c:if test="${cart == null}">
-			<p>Total: 0.0</p>
+		<c:if test="${cart == null }">
+			<p>Cart is empty!</p>
+			<jsp:include page="/contact.jsp" />
 		</c:if>
-		<c:if test="${cart != null && sum != 0.0}">
-			<%= "Total: " + cart.getTotal()%>
+
+		<c:if test="${cart != null && cart.isCartEmpty()}">
+			<p>Cart is empty!</p>
+			<jsp:include page="/contact.jsp" />
 		</c:if>
+		<c:if test="${cart != null && !cart.isCartEmpty()}">
+			<%="Total: " + cart.getSum()%>
+			<jsp:include page="/Shop/BuyForm.jsp" />
+		</c:if>
+
+
 
 	</div>
 </div>
+
+
+
 </body>
 </html>
